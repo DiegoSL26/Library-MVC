@@ -4,7 +4,7 @@ Desarrollo de una aplicación web Full-Stack simplificada para la gestión de bi
 Se cuenta con 3 páginas, la página "Home" muestra todos los libros y sus respectivos autores, la página "Add an Author" otorga la posibilidad de agregar a un autor por su nombre, finalmente la página "Add a Book" permite al usuario agregar un libro escribiendo el nombre del libro y seleccionando a su autor de una lista desplegable de autores existentes.
 Se usó ASP.NET MVC, SQL Server y Entity Framework, además fué desarrollado usando el lenguaje de programación C#, el lenguaje de marcado web HTML y sus respectivos estilos mediante el framework de CSS llamado Bootstrap.
 
-##Pasos para configurar y ejecutar la aplicación
+## Pasos para configurar y ejecutar la aplicación
 
 1. Clone este repositorio de Git en su máquina local.
 2. Abra SQL Server y conéctese al servidor teniendo en cuenta los siguientes parámetros:
@@ -24,3 +24,6 @@ Se usó ASP.NET MVC, SQL Server y Entity Framework, además fué desarrollado us
 ![Add a Book page with the list of authors](https://github.com/DiegoSL26/Library-MVC/assets/64794509/c3ed453a-94d5-4737-88d5-911e73077b52)
 
 ## Diagrama entidad relación de la base de datos
+
+![Diagrama relacional BD](https://github.com/DiegoSL26/Library-MVC/assets/64794509/f5b8bba7-8d23-4b46-867b-bcbd38e05d44)
+

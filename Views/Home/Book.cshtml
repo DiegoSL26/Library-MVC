@@ -1,0 +1,89 @@
+﻿@{
+    ViewData["Title"] = "Book";
+}
+
+<script>
+
+    var selectedOption;
+
+    function addBook() {
+        var bookTitle = $("#inputTitle").val();
+
+        if ((selectedOption === undefined || selectedOption.value === "-1") && bookTitle === "") {
+            $("#authorsList").addClass("is-invalid");
+            $("#authorsList").siblings(".invalid-feedback").text("Please select an author");
+            $("#inputTitle").addClass("is-invalid");
+            $("#inputTitle").siblings(".invalid-feedback").text("Please enter a valid title");
+            return;
+        }
+
+        if (bookTitle === "") {
+            $("#inputTitle").addClass("is-invalid");
+            $("#inputTitle").siblings(".invalid-feedback").text("Please enter a valid title");
+            $("#authorsList").removeClass("is-invalid");
+            $("#authorsList").siblings(".invalid-feedback").text("");
+            return;
+        }
+
+        if (selectedOption === undefined || selectedOption.value === "-1") {
+            $("#authorsList").addClass("is-invalid");
+            $("#authorsList").siblings(".invalid-feedback").text("Please select an author");
+            $("#inputTitle").removeClass("is-invalid");
+            $("#inputTitle").siblings(".invalid-feedback").text("");
+            return;
+        }
+
+        var url = "@Url.Action("AddBook", "Home")";
+        $.post(url, { title: bookTitle, authorid: selectedOption.value })
+            .done(function (response) {
+                if (response) {
+                    alert("The book was succesfully registered!");
+                    $("#inputTitle").val("").removeClass("is-invalid");
+                    $("#inputTitle").siblings(".invalid-feedback").text("");
+                    $("#authorsList").removeClass("is-invalid");
+                    $("#authorsList").siblings(".invalid-feedback").text("");
+                } else {
+                    alert("There was an error registering the book :(");
+                }
+            });
+    }
+
+    function getAuthors() {
+        var authorsList = document.getElementById("authorsList");
+        var url = "@Url.Action("GetAuthors", "Home")";
+        $.get(url, function (authors) {
+            authors.forEach(author => {
+                const listItem = document.createElement("option");
+                listItem.setAttribute("value", author.id)
+                listItem.append(author.name);
+                authorsList.appendChild(listItem);
+            })
+        });
+
+        authorsList.addEventListener("change", function () {
+            selectedOption = authorsList.selectedOptions[0];
+            selectedOption.setAttribute("selected", true);
+        });
+    }
+    document.addEventListener("DOMContentLoaded", getAuthors);
+</script>
+
+<h1 class="text-center">Add a Book</h1>
+<div class="p-3 col">
+    <form>
+        <label class="form-label" for="inputTitle">Book's name</label>
+        <section class="row">
+            <div class="col">
+                <input class="form-control" type="text" id="inputTitle" required />
+                <span class="invalid-feedback"></span>
+            </div>
+            <div class="col">
+                <select class="form-select" aria-label="Default select example" id="authorsList">
+                    <option value=-1>Select the author of the book</option>
+                </select>
+                <span class="invalid-feedback"></span>
+            </div>
+        </section>
+        <button type="button" class="btn btn-primary mt-3" onclick='addBook()'>Submit</button>
+    </form>
+</div>

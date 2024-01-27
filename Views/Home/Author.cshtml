@@ -1,0 +1,42 @@
+﻿@{
+    ViewData["Title"] = "Author";
+}
+
+<script>
+    function addAuthor() {
+        var authorName = $("#inputName").val();
+
+        if (!isValidName(authorName)) {
+            $("#inputName").addClass("is-invalid");
+            $("#inputName").siblings(".invalid-feedback").text("Please enter a valid name");
+            return;
+        }
+
+        var url = "@Url.Action("AddAuthor", "Home")";
+        $.post(url, { name: authorName })
+            .done(function (response) {
+                if (response) {
+                    alert("The author " + authorName + " was succesfully registered!");
+                    $("#inputName").val("").removeClass("is-invalid");
+                    $("#inputName").siblings(".invalid-feedback").text("");
+                } else {
+                    alert("There was an error registering the author :(");
+                }
+            });
+    }
+
+    function isValidName(name) {
+        const nameRegex = /^[a-zA-ZÀ-ÖØ-öø-ÿ\s]+$/; 
+        return nameRegex.test(name.trim()); 
+    }
+</script>
+
+<h1 class="text-center">Add an Author</h1>
+<div class="p-3 col">
+    <form>
+        <label class="form-label" for="inputName">Author's name</label>
+        <input class="form-control" type="text" id="inputName" required/>
+        <span class="invalid-feedback"></span>
+        <button type="button" class="btn btn-primary mt-3" onclick='addAuthor()'>Submit</button>
+    </form>
+</div>

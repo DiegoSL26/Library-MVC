@@ -1,0 +1,36 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<script>
+    function getBooks() {
+        var booksList = document.getElementById("booksList");
+        var url = "@Url.Action("GetBooks", "Home")";
+        $.get(url, function (books) {
+            books.forEach(book => {
+                const listItem = document.createElement("div");
+                listItem.classList.add("col-md-4");
+                const divItem = document.createElement("div");
+                divItem.classList.add("card");
+                divItem.classList.add("p-3");
+                divItem.classList.add("h-100");
+                divItem.classList.add("justify-content-center");
+                divItem.appendChild(document.createElement("h5")).textContent = book.title;
+                divItem.appendChild(document.createElement("span")).textContent = `By: ${book.authorName}`;
+                listItem.appendChild(divItem);
+                booksList.appendChild(listItem);
+            })
+        });
+    }
+
+    document.addEventListener("DOMContentLoaded", getBooks);
+</script>
+
+<div class="text-center mb-3">
+    <h1 class="display-4 mb-5">Welcome to AZ Smart Library</h1>
+    <div class="container px-4">
+        <div class="row g-4" id="booksList">
+        </div>
+    </div>
+</div>
+    

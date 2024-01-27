@@ -11,7 +11,7 @@ Se usó ASP.NET MVC, SQL Server y Entity Framework, además fué desarrollado us
    2.1. En Server type seleccione Database Engine.
    2.2. Server Name puede dejarlo como viene por defecto.
    2.3.  En Authentication seleccione Windows Authentication.
-3. Una vez conectado al servidor, ejecute el archivo script.sql (el cual se encuentra en la carpeta raíz del repositorio clonado) para crear e inicializar de forma local la base de datos "Library" y sus respectivas tablas "Author" y "Book" junto con sus relaciones.
+3. Una vez conectado al servidor, ejecute el archivo script.sql (el cual se encuentra en la carpeta raíz del repositorio clonado) para crear e inicializar de forma local la base de datos "Library" y sus respectivas tablas "Author" y "Book" junto con sus relaciones. En caso de que se muestre el siguiente error: "Database 'Library' does not exist. Make sure that the name is entered correctly." ejecute solo la primera linea del Script para crear la base de datos y luego ejecute por aparte desde la línea 2 en adelante.
 4. Abra el proyecto clonado en su IDE de preferencia (se recomienda usar Visual Studio Code o Visual Studio 2022).
 5. Ejecute el proyecto desde su IDE de preferencia.
 

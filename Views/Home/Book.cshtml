@@ -55,7 +55,7 @@
             authors.forEach(author => {
                 const listItem = document.createElement("option");
                 listItem.setAttribute("value", author.id)
-                listItem.append(author.name);
+                listItem.append(author.authorName);
                 authorsList.appendChild(listItem);
             })
         });

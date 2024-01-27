@@ -4,19 +4,19 @@
 
 <script>
     function addAuthor() {
-        var authorName = $("#inputName").val();
+        var inputName = $("#inputName").val();
 
-        if (!isValidName(authorName)) {
+        if (!isValidName(inputName)) {
             $("#inputName").addClass("is-invalid");
             $("#inputName").siblings(".invalid-feedback").text("Please enter a valid name");
             return;
         }
 
         var url = "@Url.Action("AddAuthor", "Home")";
-        $.post(url, { name: authorName })
+        $.post(url, { authorName: inputName })
             .done(function (response) {
                 if (response) {
-                    alert("The author " + authorName + " was succesfully registered!");
+                    alert("The author " + inputName + " was succesfully registered!");
                     $("#inputName").val("").removeClass("is-invalid");
                     $("#inputName").siblings(".invalid-feedback").text("");
                 } else {

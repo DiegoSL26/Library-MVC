@@ -1,7 +1,6 @@
 using Library_MVC.Models;
 using Microsoft.AspNetCore.Mvc;
-using System.Data.SqlClient;
-using System.Diagnostics;
+using Microsoft.EntityFrameworkCore;
 
 namespace Library_MVC.Controllers
 {
@@ -9,8 +8,11 @@ namespace Library_MVC.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        private readonly LibraryContext _context;
+
+        public HomeController(ILogger<HomeController> logger, LibraryContext context)
         {
+            _context = context;
             _logger = logger;
         }
 
@@ -32,88 +34,43 @@ namespace Library_MVC.Controllers
         [HttpGet]
         public JsonResult GetAuthors()
         {
-            Dbconnection dbconnection = new Dbconnection();
-            string query = "SELECT * FROM Author";
-            SqlCommand cmd = new SqlCommand(query, dbconnection.Open_Connection());
-            List<Author> authorList = [];
-            using (SqlDataReader reader = cmd.ExecuteReader())
-            {
-                while (reader.Read())
-                {
-                    authorList.Add(new Author { Id = Convert.ToInt32(reader["id"]), Name = reader["authorName"].ToString() });
-                }
-            }
-            dbconnection.Close_Connection();
-            return Json(authorList);
+            return Json(_context.Author.ToList());
         }
 
         [HttpGet]
         public JsonResult GetBooks()
         {
-            Dbconnection dbconnection = new Dbconnection();
-            string query = "SELECT B.title as 'title', A.authorName as 'authorName' FROM Book B JOIN Author A ON B.authorID = A.id";
-            SqlCommand cmd = new SqlCommand(query, dbconnection.Open_Connection());
-            List<Book> bookList = [];
-            using (SqlDataReader reader = cmd.ExecuteReader())
-            {
-                while (reader.Read())
-                {
-                    bookList.Add(new Book { Title = reader["title"].ToString(), AuthorName = reader["authorName"].ToString() });
-                }
-            }
-            dbconnection.Close_Connection();
-            return Json(bookList);
+            return Json(_context.Book.Include(b => b.Author).ToList());
         }
 
         [HttpPost]
         public bool AddAuthor(Author author)
         {
-            Dbconnection dbconnection = new Dbconnection();
             try
             {
-                string query = "INSERT INTO Author VALUES (@name)";
-                SqlCommand cmd = new SqlCommand(@query, dbconnection.Open_Connection());
-                cmd.Parameters.AddWithValue("@name", author.Name);
-                cmd.ExecuteNonQuery();
+                _context.Add(author);
+                _context.SaveChanges();
                 return true;
             }
             catch
             {
                 return false;
-            }
-            finally
-            {
-                dbconnection.Close_Connection();
             }
         }
 
         [HttpPost]
         public bool AddBook(Book book)
         {
-            Dbconnection dbconnection = new Dbconnection();
             try
             {
-                string query = "INSERT INTO Book (Title, AuthorID) VALUES (@title, @authorid)";
-                SqlCommand cmd = new SqlCommand(@query, dbconnection.Open_Connection());
-                cmd.Parameters.AddWithValue("@title", book.Title);
-                cmd.Parameters.AddWithValue("@authorid", book.AuthorID);
-                cmd.ExecuteNonQuery();
+                _context.Add(book);
+                _context.SaveChanges();
                 return true;
             }
             catch
             {
                 return false;
             }
-            finally
-            {
-                dbconnection.Close_Connection();
-            }
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }

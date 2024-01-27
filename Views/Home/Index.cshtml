@@ -16,7 +16,7 @@
                 divItem.classList.add("h-100");
                 divItem.classList.add("justify-content-center");
                 divItem.appendChild(document.createElement("h5")).textContent = book.title;
-                divItem.appendChild(document.createElement("span")).textContent = `By: ${book.authorName}`;
+                divItem.appendChild(document.createElement("span")).textContent = `By: ${book.author.authorName}`;
                 listItem.appendChild(divItem);
                 booksList.appendChild(listItem);
             })

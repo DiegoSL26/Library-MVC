@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "d:\\Code Projects\\.NET\\Library_MVC\\Library_MVC\\Library_MVC\\Library_MVC.csproj": {}
+    "D:\\Code Projects\\.NET\\Library_MVC\\Library_MVC\\Library_MVC\\Library_MVC.csproj": {}
   },
   "projects": {
-    "d:\\Code Projects\\.NET\\Library_MVC\\Library_MVC\\Library_MVC\\Library_MVC.csproj": {
+    "D:\\Code Projects\\.NET\\Library_MVC\\Library_MVC\\Library_MVC\\Library_MVC.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "d:\\Code Projects\\.NET\\Library_MVC\\Library_MVC\\Library_MVC\\Library_MVC.csproj",
+        "projectUniqueName": "D:\\Code Projects\\.NET\\Library_MVC\\Library_MVC\\Library_MVC\\Library_MVC.csproj",
         "projectName": "Library_MVC",
-        "projectPath": "d:\\Code Projects\\.NET\\Library_MVC\\Library_MVC\\Library_MVC\\Library_MVC.csproj",
+        "projectPath": "D:\\Code Projects\\.NET\\Library_MVC\\Library_MVC\\Library_MVC\\Library_MVC.csproj",
         "packagesPath": "C:\\Users\\diego\\.nuget\\packages\\",
-        "outputPath": "d:\\Code Projects\\.NET\\Library_MVC\\Library_MVC\\Library_MVC\\obj\\",
+        "outputPath": "D:\\Code Projects\\.NET\\Library_MVC\\Library_MVC\\Library_MVC\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\diego\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -40,9 +40,13 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
-            "System.Data.SqlClient": {
+            "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[4.8.6, )"
+              "version": "[8.0.1, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[8.0.1, )"
             }
           },
           "imports": [

@@ -16,12 +16,13 @@ CREATE TABLE Book (
 )
 
 insert into Author values ('Mario Mendoza');
-insert into Book values ('La melancolia de los feos', 1);
+insert into Author values ('JK Rowling');
+insert into Author values ('Gabriel Garcia Marquez');
+insert into Author values ('Stephen King');
+insert into Author values ('Santiago Gamboa');
 
-select * from Author;
-
-select * from Book;
-
-DROP TABLE Book;
-DROP TABLE Author;
-DROP DATABASE Library;
+insert into Book values ('La melancolía de los feos', 1);
+insert into Book values ('Harry Potter', 2);
+insert into Book values ('Cien años de soledad', 3);
+insert into Book values ('It', 4);
+insert into Book values ('Perder es cuestión de método', 5);
